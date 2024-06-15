@@ -27,9 +27,9 @@ class Pos:
     """
     def __init__(self, state: int = STATES['FREE']):
         """Initialize one position."""
-        self.prev = (-1, -1, -1)
-        self.state = state
-        self.dist = inf
+        self._prev = (-1, -1, -1)
+        self._state = state
+        self._dist = inf
 
     def check_state(self, state: int) -> bool:
         """Check if input state is same with state of current position.
@@ -38,33 +38,33 @@ class Pos:
         Return:
             bool - True if states are same, False otherwise.
         """
-        return self.state == state
+        return self._state == state
 
     def get_prev(self) -> Tuple[int, int, int]:
         """Return previous position set during AStar algorithm."""
-        return self.prev
+        return self._prev
 
     def set_prev(self, prev: Tuple[int, int, int]) -> None:
         """Set new previous position.
         Attributes:
             prev - Tuple[int, int, int] - previous position in 3D location.
         """
-        self.prev = prev
+        self._prev = prev
 
     def set_dist(self, dist: float) -> None:
         """Set new distance to start position.
         Attributes:
             dist - int - new distance to start.
         """
-        self.dist = dist
+        self._dist = dist
 
     def get_dist(self) -> float:
         """Return distance to start position."""
-        return self.dist
+        return self._dist
 
     def set_state(self, state: int) -> None:
         """Set new state of this position.
         Attributes:
             state - int - new state.
         """
-        self.state = state
+        self._state = state
