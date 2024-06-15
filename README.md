@@ -1,9 +1,12 @@
 # astar3D
 
+![Example](img/example.gif)
+
 ## About
 This project is a visualization of the A* algorithm in 3D. 
 The location, including the start and end points, is generated randomly. 
-User can increase the number of barriers at runtime.
+User can increase the number of barriers at runtime. 
+Visualization part of this project was implemented using `ursina` library.
 
 This project is a reworked version of my semester work 
 for the course Artificial Intelligence Fundamentals in the academic year 2022/2023.
