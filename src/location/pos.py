@@ -3,6 +3,7 @@
 """
 from math import inf
 from typing import Tuple
+from utils.settings import STATES
 
 
 class Pos:
@@ -13,7 +14,7 @@ class Pos:
             prev - Tuple[int, int, int] - previous position.
             We were in this position in previous step of the AStar algorithm.
 
-            state - int - state of this position. Can be:
+            state - int - state of this position. By default, FREE. Can be:
                 1 - BARRIER - wall, floor or roof
                 2 - FREE - empty space
                 3 - FOUND - visited position
@@ -22,7 +23,7 @@ class Pos:
             On the beginning of the AStar algorithm, all positions is
             on the max distance from start point, so we can use inf.
     """
-    def __init__(self, state: int):
+    def __init__(self, state: int = STATES['FREE']):
         """Initialize one position."""
         self.prev = (-1, -1, -1)
         self.state = state
