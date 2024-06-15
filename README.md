@@ -1,3 +1,5 @@
+[![tests](https://github.com/DainfromLiria/astar3D/actions/workflows/main.yml/badge.svg)](https://github.com/DainfromLiria/astar3D/actions/workflows/main.yml)
+
 # astar3D
 
 ![Example](img/example.gif)
