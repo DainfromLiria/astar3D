@@ -61,8 +61,9 @@ class AStar:
         return False
 
     def draw_path(self) -> None:
-        """Backtrack the path and draw it."""
-        tmp = self.graph.end
-        while tmp != self.graph.start:
-            self.graph.path_entities.append(draw_cube(self.graph.get_prev(tmp), color.green))
-            tmp = self.graph.get_prev(tmp)
+        """Backtrack the path and draw it if path doesn't draw."""
+        if len(self.graph.path_entities) == 0:
+            tmp = self.graph.end
+            while tmp != self.graph.start:
+                self.graph.path_entities.append(draw_cube(self.graph.get_prev(tmp), color.green))
+                tmp = self.graph.get_prev(tmp)
