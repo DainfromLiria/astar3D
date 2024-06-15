@@ -65,20 +65,23 @@ def get_random_pos() -> Tuple[int, int, int]:
     return x, y, z
 
 
-def draw_cube(pos: Tuple[int, int, int], color) -> None:
+def draw_cube(pos: Tuple[int, int, int], color) -> Entity:
     """Draw a cube on position pos using input color.
 
     Attributes:
         pos - Tuple[int, int, int] - input position, where we want to draw a cube.
         color - ursina.color - cube color.
+    Return:
+        Entity - cube object
     """
-    Entity(model="cube", color=color, position=pos,
-           parent=scene,
-           collider="box",
-           texture="white_cube",
-           origin_y=0.5,
-           ignore=True
-           )
+    e = Entity(model="cube", color=color, position=pos,
+               parent=scene,
+               collider="box",
+               texture="white_cube",
+               origin_y=0.5,
+               ignore=True
+               )
+    return e
 
 
 def is_in_range(pos: Tuple[int, int, int]) -> bool:
@@ -90,7 +93,7 @@ def is_in_range(pos: Tuple[int, int, int]) -> bool:
     Return:
         bool - True if position is inside location, False otherwise.
     """
-    for p, h in zip(pos, (LIMITS['x_max']-1, LIMITS['y_max']-1, LIMITS['z_max']-1)):
+    for p, h in zip(pos, (LIMITS['x_max'] - 1, LIMITS['y_max'] - 1, LIMITS['z_max'] - 1)):
         if p >= h or p <= 0:
             return False
     return True
