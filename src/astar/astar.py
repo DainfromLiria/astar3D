@@ -63,5 +63,5 @@ class AStar:
         """Backtrack the path and draw it."""
         tmp = self.graph.end
         while tmp != self.graph.start:
-            draw_cube(self.graph.get_prev(tmp), color.green)
+            self.graph.entities.append(draw_cube(self.graph.get_prev(tmp), color.green))
             tmp = self.graph.get_prev(tmp)
