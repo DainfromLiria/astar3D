@@ -52,7 +52,8 @@ class AStar:
                 # OR if value of heuristic function is less than current value for his position
                 if (is_in_range(nb) and
                         (self.graph.check_state(nb, STATES['FREE']) or
-                         new_dist < self.graph.get_dist(nb))):
+                         (new_dist < self.graph.get_dist(nb) and
+                          self.graph.check_state(nb, STATES['FOUND'])))):
                     to_visit.put((new_dist, nb))
                     self.graph.set_prev(nb, curr)
                     self.graph.set_state(nb, STATES['FOUND'])
@@ -63,5 +64,5 @@ class AStar:
         """Backtrack the path and draw it."""
         tmp = self.graph.end
         while tmp != self.graph.start:
-            self.graph.entities.append(draw_cube(self.graph.get_prev(tmp), color.green))
+            self.graph.path_entities.append(draw_cube(self.graph.get_prev(tmp), color.green))
             tmp = self.graph.get_prev(tmp)
