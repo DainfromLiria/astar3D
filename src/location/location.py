@@ -21,6 +21,8 @@ class Location:
 
         start - Tuple[int, int, int] - begin position.
         end - Tuple[int, int, int] - end position.
+        entities - List[Entity] - barrier Entities. (red cubes)
+        path_entities - List[Entity] - path Entities. (green cubes)
     """
     def __init__(self):
         """Create and set location."""
@@ -28,6 +30,7 @@ class Location:
         self.start = None
         self.end = None
         self.entities = []
+        self.path_entities = []
         self.create_location()
         self.set_location()
 
@@ -110,12 +113,17 @@ class Location:
                 draw_cube((x, y, z), color.dark_gray)
 
     def clear_location(self) -> None:
-        """Clear location. Clear barriers, start and end positions."""
+        """Clear location.
+        Clear barriers, start, end positions and path from start to end."""
         for e in self.entities:
+            e.disable()
+            destroy(e)
+        for e in self.path_entities:
             e.disable()
             destroy(e)
         self.entities.clear()
         self.location.clear()
+        self.path_entities.clear()
         self.start = None
         self.end = None
 
