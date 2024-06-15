@@ -1,3 +1,4 @@
 ursina>=7.0.0
 colorama>=0.4.6
 pytest>=8.0.1
+keyboard>=0.13.5
