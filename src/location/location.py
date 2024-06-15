@@ -119,14 +119,25 @@ class Location:
         self.start = None
         self.end = None
 
+    def generate_barriers(self, b_count: int = BASE['BARRIER_COUNT']) -> None:
+        """Generate b_count barriers inside location.
+
+        Attributes:
+            b_count - int - number of barriers that will be generated.
+        """
+        i = 0  # if randomizer will be generated already existed position
+        while i != b_count:
+            r_pos = get_random_pos()
+            if r_pos not in self.location:
+                self.location[r_pos] = Pos(STATES['BARRIER'])
+                self.entities.append(draw_cube(r_pos, color.red))
+                i += 1
+
     def set_location(self) -> None:
         """Set location. Generate barriers, start and finish points."""
         self.clear_location()  # if location has already used
         # create barriers
-        for _ in range(BASE['BARRIER_COUNT']):
-            r_pos = get_random_pos()
-            self.location[r_pos] = Pos(STATES['BARRIER'])
-            self.entities.append(draw_cube(r_pos, color.red))
+        self.generate_barriers()
 
         # generate start and finish.
         while self.start is None or self.end is None:
