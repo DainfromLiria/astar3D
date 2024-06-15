@@ -6,7 +6,7 @@ from math import inf
 from itertools import product
 from typing import Tuple
 # graphic
-from ursina import color
+from ursina import color, destroy
 # app moduls
 from utils.settings import BASE, LIMITS, STATES
 from utils.support import is_wall, get_random_pos, draw_cube
@@ -27,6 +27,7 @@ class Location:
         self.location = {}
         self.start = None
         self.end = None
+        self.entities = []
         self.create_location()
         self.set_location()
 
@@ -100,21 +101,32 @@ class Location:
             self.location[pos] = Pos()
         self.location[pos].set_state(state)
 
-    def create_location(self) -> None:
-        """Create and draw location. Create walls, roof and floor."""
+    @staticmethod
+    def create_location() -> None:
+        """Draw location. Draw walls, roof and floor."""
         for x, y, z in product(range(LIMITS['x_max']), range(LIMITS['y_max']),
                                range(LIMITS['z_max'])):
             if is_wall(x, y, z):
-                self.location[(x, y, z)] = Pos(STATES['BARRIER'])
                 draw_cube((x, y, z), color.dark_gray)
+
+    def clear_location(self) -> None:
+        """Clear location. Clear barriers, start and end positions."""
+        for e in self.entities:
+            e.disable()
+            destroy(e)
+        self.entities.clear()
+        self.location.clear()
+        self.start = None
+        self.end = None
 
     def set_location(self) -> None:
         """Set location. Generate barriers, start and finish points."""
+        self.clear_location()  # if location has already used
         # create barriers
         for _ in range(BASE['BARRIER_COUNT']):
             r_pos = get_random_pos()
             self.location[r_pos] = Pos(STATES['BARRIER'])
-            draw_cube(r_pos, color.red)
+            self.entities.append(draw_cube(r_pos, color.red))
 
         # generate start and finish.
         while self.start is None or self.end is None:
@@ -124,11 +136,11 @@ class Location:
                 if s_pos not in self.location:
                     self.start = s_pos
                     self.location[s_pos] = Pos(STATES['FREE'])
-                    draw_cube(s_pos, color.blue)
+                    self.entities.append(draw_cube(s_pos, color.blue))
             # create finish
             if self.end is None:
                 e_pos = get_random_pos()
                 if e_pos not in self.location:
                     self.end = e_pos
                     self.location[e_pos] = Pos(STATES['FREE'])
-                    draw_cube(e_pos, color.pink)
+                    self.entities.append(draw_cube(e_pos, color.pink))
