@@ -17,7 +17,7 @@ class Pos:
             We were in this position in previous step of the AStar algorithm.
 
             state - int - state of this position. By default, FREE. Can be:
-                1 - BARRIER - wall, floor or roof
+                1 - BARRIER - barrier inside the location
                 2 - FREE - empty space
                 3 - FOUND - visited position
 
