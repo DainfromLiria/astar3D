@@ -4,7 +4,8 @@
 BASE = {
     'WIDTH': 1280,
     'HEIGHT': 800,
-    'BARRIER_COUNT': 100
+    'BARRIER_COUNT': 200,
+    'INCREASE_BARRIER_COUNT': 5
 }
 STATES = {
     "BARRIER": 1,
