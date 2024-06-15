@@ -34,7 +34,7 @@ def euklid_dist(p_start: Tuple[int, int, int], p_end: Tuple[int, int, int]) -> f
     Return:
         int - Euclidean distance from point p_start to point p_end.
     """
-    return sqrt(sum((e - s) ** 2 for s, e in zip(p_start, p_end)))
+    return round(sqrt(sum((e - s) ** 2 for s, e in zip(p_start, p_end))), 3)
 
 
 def is_wall(x: int, y: int, z: int) -> bool:
