@@ -1,8 +1,10 @@
 """
     Class represented one cube (position) in 3D location
 """
+# helper
 from math import inf
 from typing import Tuple
+# app moduls
 from utils.settings import STATES
 
 
